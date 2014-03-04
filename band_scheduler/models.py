@@ -29,8 +29,8 @@ class Band(models.Model):
 
     name =          models.CharField(max_length = 100)
     day =           models.CharField(max_length = 1, choices = DAY_CHOICES)
-    start_time =    models.TimeField
-    end_time =      models.TimeField
+    start_time =    models.TimeField()
+    end_time =      models.TimeField()
     stage =         models.CharField(max_length = 20, choices = STAGE_CHOICES)
 
 class Schedule(models.Model):
