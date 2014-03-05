@@ -1,0 +1,12 @@
+.day {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.day-heading {
+    text-align: center;
+}
+
+.submit-wrapper {
+    text-align: center;
+}

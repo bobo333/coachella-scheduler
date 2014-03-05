@@ -36,7 +36,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'band_scheduler'
+    'band_scheduler',
+    'south'
 )
 
 MIDDLEWARE_CLASSES = (

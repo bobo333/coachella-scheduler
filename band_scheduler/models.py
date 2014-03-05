@@ -27,12 +27,15 @@ class Band(models.Model):
         (SAHARA_STAGE, 'Sahara Tent')
     ]
 
-    name =          models.CharField(max_length = 100)
-    day =           models.CharField(max_length = 1, choices = DAY_CHOICES)
-    start_time =    models.TimeField()
-    end_time =      models.TimeField()
-    stage =         models.CharField(max_length = 20, choices = STAGE_CHOICES)
+    name =          models.CharField(max_length = 100, unique=True, null=False)
+    day =           models.CharField(max_length = 1, choices = DAY_CHOICES,
+                                        null=False)
+    start_time =    models.TimeField(null=True, blank=True)
+    end_time =      models.TimeField(null=True, blank=True)
+    stage =         models.CharField(max_length = 20, choices = STAGE_CHOICES,
+                                        null=True, blank=True)
 
 class Schedule(models.Model):
-    user =  models.ForeignKey(settings.AUTH_USER_MODEL)
-    bands = models.ManyToManyField(Band)
+    user =  models.ForeignKey(settings.AUTH_USER_MODEL, null=False, 
+                                unique=True)
+    bands = models.ManyToManyField(Band, blank=True)
