@@ -13,8 +13,8 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^login$', login, {'template_name': 'registration/login.html'}),
-    url(r'^logout$', logout, {'next_page':  settings.LOGOUT_REDIRECT_URL}),
-    url(r'^register$', register),
+    url(r'^login$', login, {'template_name': 'registration/login.html'}, name='login'),
+    url(r'^logout$', logout, {'next_page':  settings.LOGOUT_REDIRECT_URL}, name='logout'),
+    url(r'^register$', register, name='register'),
     url(r'^bands/', include('band_scheduler.urls', namespace='bands'))
 )
