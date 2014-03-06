@@ -8,5 +8,9 @@ class BandAdmin(admin.ModelAdmin):
     list_filter = ('day', 'stage')
     search_fields = ('name',)
 
+class ScheduleAdmin(admin.ModelAdmin):
+    filter_horizontal = ('bands', )
+    list_display = ('username', )
+
 admin.site.register(Band, BandAdmin)
-admin.site.register(Schedule)
+admin.site.register(Schedule, ScheduleAdmin)

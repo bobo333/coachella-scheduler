@@ -35,7 +35,16 @@ class Band(models.Model):
     stage =         models.CharField(max_length = 20, choices = STAGE_CHOICES,
                                         null=True, blank=True)
 
+    def __unicode__(self):
+        return self.name
+
+    def __str__(self):
+        return self.name
+
 class Schedule(models.Model):
     user =  models.ForeignKey(settings.AUTH_USER_MODEL, null=False, 
                                 unique=True)
     bands = models.ManyToManyField(Band, blank=True)
+
+    def username(self):
+        return self.user.username

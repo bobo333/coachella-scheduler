@@ -8,7 +8,7 @@
     <body>
         <div>
             {% if user.is_authenticated %}
-                <a href="{% url 'logout' %}">logout</a>
+                hello {{ user.username }} <a href="{% url 'logout' %}">logout</a>
             {% else %}
                 <a href="{% url 'login' %}">login</a>
                 <a href="{% url 'register' %}">register</a>
