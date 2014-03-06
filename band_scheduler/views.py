@@ -16,7 +16,10 @@ def index(request):
     bands.append(band_list[start:])
 
     context = {'bands': bands}
-    return render(request, 'band_scheduler/index.html', context)
+    if request.user.is_authenticated():
+        return render(request, 'band_scheduler/index_auth.html', context)
+    else:
+        return render(request, 'band_scheduler/index.html', context)
 
 def createSchedule(request):
     print request.POST

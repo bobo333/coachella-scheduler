@@ -1,28 +1,29 @@
+{% extends "band_scheduler/base.html" %}
+
+{% block head %}
 {% load staticfiles %}
 <link rel="stylesheet" type="text/css" href="{% static 'band_scheduler/index.css' %}">
+<title>Coachella 2014 Band List</title>
+{% endblock %}
+
+{% block content %}
 {% if bands %}
     <h1>All Bands</h1>
-    <form action="{% url 'bands:createSchedule' %}" method="post">
-        {% csrf_token %}
-        {% for band_list in bands %}
-            <div class="day">
-                <div class="day-heading">
-                    <h3>Day {{ forloop.counter }}</h3>
-                </div>
-                <ul>
-                {% for band in band_list %}
-                    <li class="band">
-                        <label for="{{ band.id }}_checkbox">{{ band.name }}</label>
-                        <input id="{{band.id}}_checkbox" name="bands" type="checkbox" value="{{band.id}}" />
-                    </li>
-                {% endfor %}
-                </ul>
+    {% for band_list in bands %}
+        <div class="day">
+            <div class="day-heading">
+                <h3>Day {{ forloop.counter }}</h3>
             </div>
-        {% endfor %}
-        <div class="submit-wrapper">
-            <input type="submit" value="Save Schedule" />
+            <ul>
+            {% for band in band_list %}
+                <li class="band">
+                    {{ band.name }}
+                </li>
+            {% endfor %}
+            </ul>
         </div>
-    </form>
+    {% endfor %}
 {% else %}
     <p>No bands available :(</p>
 {% endif %}
+{% endblock %}
