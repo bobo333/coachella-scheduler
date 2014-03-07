@@ -1,0 +1,34 @@
+{% extends "band_scheduler/base.html" %}
+
+{% block head %}
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'band_scheduler/index.css' %}">
+<title>My Schedule</title>
+{% endblock %}
+
+{% block content %}
+<h1>My Schedule</h1>
+{% if bands %}
+    {% for band_list in bands %}
+        <div class="day">
+            <div class="day-heading">
+                <h3>Day {{ forloop.counter }}</h3>
+            </div>
+            <ul>
+            {% for band in band_list %}
+                <li class="band">
+                    {{ band.name }}
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+    <div>
+        <a href="{% url 'bands:index' %}">Edit Schedule</a>
+    </div>
+{% elif no_user %}
+    You must be logged in to create a schedule.
+{% else %}
+    <a href="{% url 'bands:index' %}">Create a Schedule</a>
+{% endif %}
+{% endblock %}

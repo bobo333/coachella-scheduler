@@ -7,15 +7,7 @@ from band_scheduler.models import Band, Schedule
 # Create your views here.
 def index(request):
     band_list = Band.objects.all().order_by('day', 'name')
-    bands = []
-    day = band_list[0].day
-    start = 0
-    for idx, band in enumerate(band_list):
-        if band.day != day:
-            bands.append(band_list[start:idx])
-            day = band.day
-            start = idx
-    bands.append(band_list[start:])
+    bands = bandsByDay(band_list)
     context = {'bands': bands}
     if request.user.is_authenticated():
         try:
@@ -37,4 +29,27 @@ def createSchedule(request):
         schedule = Schedule(user=request.user)
     schedule.save()
     schedule.bands.add(*bands)
-    return HttpResponseRedirect(reverse('bands:index'))
+    return HttpResponseRedirect(reverse('bands:mySchedule'))
+
+def mySchedule(request):
+    user = request.user
+    context = {}
+    if user.is_authenticated():
+        try:
+            bands = Schedule.objects.get(user=user).bands.all().order_by('day', 'name')
+            context['bands'] = bandsByDay(bands)
+        except Schedule.DoesNotExist:
+            pass
+    else:
+        context = {'no_user': True}
+    return render(request, 'band_scheduler/my-schedule.html', context)
+
+def bandsByDay(band_list):
+    bands_list = []
+    for day in Band.DAY_CHOICES:
+        i = 0
+        limit = len(band_list)
+        while i < limit and band_list[i].day == day[0]: i += 1
+        bands_list.append(band_list[:i])
+        band_list = band_list[i:]
+    return bands_list
