@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from django.contrib.auth.models import User
 
 from band_scheduler.models import Band, Schedule
 
@@ -43,6 +44,18 @@ def mySchedule(request):
     else:
         context = {'no_user': True}
     return render(request, 'band_scheduler/my-schedule.html', context)
+
+def userSchedule(request, username):
+    context = {
+        'username': username
+    }
+    try:
+        user = User.objects.get(username=username)
+        bands = Schedule.objects.get(user=user).bands.all().order_by('day', 'name')
+        context['bands'] = bandsByDay(bands)
+    except (User.DoesNotExist, Schedule.DoesNotExist):
+        pass
+    return render(request, 'band_scheduler/user-schedule.html', context)
 
 def bandsByDay(band_list):
     bands_list = []
