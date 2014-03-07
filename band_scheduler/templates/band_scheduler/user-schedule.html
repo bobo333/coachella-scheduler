@@ -7,8 +7,8 @@
 {% endblock %}
 
 {% block content %}
-<h1>My Schedule</h1>
 {% if bands %}
+    <h1>{{ username }}'s Schedule</h1>
     {% for band_list in bands %}
         <div class="day">
             <div class="day-heading">
@@ -24,6 +24,9 @@
         </div>
     {% endfor %}
 {% else %}
-    Schedule for {{ username }} not found.
+    <h1>Oops!</h1>
+    <div>
+        Schedule for user {{ username }} not found.
+    </div>
 {% endif %}
 {% endblock %}

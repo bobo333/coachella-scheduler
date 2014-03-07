@@ -43,6 +43,7 @@ def mySchedule(request):
             pass
     else:
         context = {'no_user': True}
+    context['share_link'] = "%s/schedule/%s" % (request.get_host(), user.username)
     return render(request, 'band_scheduler/my-schedule.html', context)
 
 def userSchedule(request, username):
