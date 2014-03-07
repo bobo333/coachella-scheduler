@@ -6,5 +6,5 @@ urlpatterns = patterns('',
     url(r'^$', views.index, name='index'),
     url(r'^create-schedule$', views.createSchedule, name='createSchedule'),
     url(r'^schedule/?$', views.mySchedule, name='mySchedule'),
-    url(r'^schedule/(?P<username>.+)/$', views.userSchedule, name='userSchedule')
+    url(r'^schedule/(?P<username>[^/^\s]+)/$', views.userSchedule, name='userSchedule')
 )
