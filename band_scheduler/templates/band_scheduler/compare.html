@@ -1,0 +1,34 @@
+{% extends "band_scheduler/base.html" %}
+{% load band_scheduler_filters %}
+
+{% block head %}
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'band_scheduler/compare.css' %}">
+    <title>Compare Schedules</title>
+{% endblock %}
+
+{% block content %}
+    {% for day in days %}
+        <div class="day">
+            <h1>Day {{ day.0 }}</h1>
+            <div class="sub-day no-margin">
+                <h2>Bands in Common</h2>
+                <ul>
+                    {% for band in bands_in_common|get_item:day.0 %}
+                        <li>{{ band.name }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% for user in users %}
+                <div class="sub-day">
+                    <h2>{{ user.username }}</h2>
+                    <ul>
+                        {% for band in user_bands|get_item:user.username|get_item:day.0 %}
+                            <li>{{ band.name }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+{% endblock %}
