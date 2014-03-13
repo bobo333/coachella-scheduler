@@ -8,11 +8,15 @@
     <body>
         <div>
             {% if user.is_authenticated %}
-                hello {{ user.username }} <a href="{% url 'logout' %}">logout</a>
+                hello {{ user.username }} 
+                <a href="{% url 'logout' %}">logout</a>
+                <a href="{% url 'bands:mySchedule' %}">Your Schedule</a>
             {% else %}
                 <a href="{% url 'login' %}">login</a>
                 <a href="{% url 'register' %}">register</a>
             {% endif %}
+            <a href="{% url 'bands:index' %}">View Bands</a>
+            <a href="{% url 'home' %}">Home</a>
         </div>
         {% block content %}{% endblock %}
     </body>

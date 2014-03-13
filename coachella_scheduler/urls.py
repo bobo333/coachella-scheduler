@@ -16,5 +16,6 @@ urlpatterns = patterns('',
     url(r'^login$', login, {'template_name': 'registration/login.html'}, name='login'),
     url(r'^logout$', logout, {'next_page':  settings.LOGOUT_REDIRECT_URL}, name='logout'),
     url(r'^register$', register, name='register'),
-    url(r'^bands/', include('band_scheduler.urls', namespace='bands'))
+    url(r'^bands/', include('band_scheduler.urls', namespace='bands')),
+    url(r'^$', 'coachella_scheduler.views.home', name="home")
 )
