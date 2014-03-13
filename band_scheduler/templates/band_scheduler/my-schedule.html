@@ -8,8 +8,8 @@
 
 {% block content %}
 <h1>My Schedule</h1>
-<p>Use this link to send your schedule: {{ share_link }}
 {% if bands %}
+    <p>Use this link to send your schedule: {{ share_link }}
     {% for band_list in bands %}
         <div class="day">
             <div class="day-heading">
