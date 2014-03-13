@@ -15,7 +15,7 @@ TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates')
 )
 
-LOGIN_REDIRECT_URL = '/bands'
+LOGIN_REDIRECT_URL = '/bands/schedule'
 LOGOUT_REDIRECT_URL = '/bands'
 
 
@@ -69,8 +69,8 @@ DATABASES = {
         'NAME': 'coachella_scheduler',
         'USER': 'root',
         'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '25827'
+        'HOST': os.environ['DJANGO_DB_HOST'],
+        'PORT': os.environ['DJANGO_DB_PORT']
     }
 }
 
