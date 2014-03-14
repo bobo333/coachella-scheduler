@@ -9,6 +9,7 @@
 {% block content %}
 {% if bands %}
     <h1>{{ username }}'s Schedule</h1>
+    <a href="{% url 'bands:compareSchedules' %}?schedules={{ username }}">Compare schedules</a><br />
     {% for band_list in bands %}
         <div class="day">
             <div class="day-heading">

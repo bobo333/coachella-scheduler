@@ -15,6 +15,7 @@ TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates')
 )
 
+LOGIN_URL = '/login'
 LOGIN_REDIRECT_URL = '/bands/schedule'
 LOGOUT_REDIRECT_URL = '/bands'
 

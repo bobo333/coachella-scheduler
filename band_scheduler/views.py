@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 from band_scheduler.models import Band, Schedule
 
@@ -43,7 +44,7 @@ def mySchedule(request):
             pass
     else:
         context = {'no_user': True}
-    context['share_link'] = "%s/schedule/%s" % (request.get_host(), user.username)
+    context['share_link'] = "%s/bands/schedule/%s" % (request.get_host(), user.username)
     return render(request, 'band_scheduler/my-schedule.html', context)
 
 def userSchedule(request, username):
@@ -58,6 +59,7 @@ def userSchedule(request, username):
         pass
     return render(request, 'band_scheduler/user-schedule.html', context)
 
+@login_required
 def compareSchedules(request):
     usernames = request.GET.get('schedules').split(',')
     users = [request.user]
